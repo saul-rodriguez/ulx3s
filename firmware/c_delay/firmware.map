@@ -1,0 +1,104 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000010000 0x0000000000100000 xr
+RAM              0x0000000000000000 0x0000000000000400 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000000010000      0x1fc
+                0x0000000000010000                . = ALIGN (0x4)
+ *(.text)
+ .text          0x0000000000010000      0x176 start.o
+                0x000000000001009c                disable_irq
+                0x00000000000100ae                enable_irq
+ .text          0x0000000000010176       0x54 /tmp/ccXywr42.ltrans0.ltrans.o
+                0x0000000000010176                irq
+ *(.text*)
+ .text.startup  0x00000000000101ca       0x30 /tmp/ccXywr42.ltrans0.ltrans.o
+                0x00000000000101ca                main
+ *(.rodata)
+ *(.rodata*)
+ *(.srodata)
+ *(.srodata*)
+ *(.eh_frame)
+ *(.eh_frame*)
+                0x00000000000101fc                . = ALIGN (0x4)
+ *fill*         0x00000000000101fa        0x2 
+                0x00000000000101fc                _etext = .
+                0x00000000000101fc                _sidata = _etext
+
+.rela.dyn       0x00000000000101fc        0x0
+ .rela.text     0x00000000000101fc        0x0 start.o
+
+.data           0x0000000000000000        0x4 load address 0x00000000000101fc
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _sdata = .
+                0x0000000000000000                _ram_start = .
+ *(.data)
+ .data          0x0000000000000000        0x1 start.o
+ .data          0x0000000000000001        0x0 /tmp/ccXywr42.ltrans0.ltrans.o
+ *(.data*)
+ *(.sdata)
+ *(.sdata*)
+ *(.init_array)
+ *(.init_array*)
+                0x0000000000000004                . = ALIGN (0x4)
+ *fill*         0x0000000000000001        0x3 
+                0x0000000000000004                _edata = .
+
+.bss            0x0000000000000004        0x0 load address 0x0000000000010200
+                0x0000000000000004                . = ALIGN (0x4)
+                0x0000000000000004                _sbss = .
+ *(.bss)
+ .bss           0x0000000000000004        0x0 start.o
+ .bss           0x0000000000000004        0x0 /tmp/ccXywr42.ltrans0.ltrans.o
+ *(.bss*)
+ *(.sbss)
+ *(.sbss*)
+ *(COMMON)
+                0x0000000000000004                . = ALIGN (0x4)
+                0x0000000000000004                _ebss = .
+
+.heap           0x0000000000000004        0x0
+                0x0000000000000004                . = ALIGN (0x4)
+                0x0000000000000004                _heap_start = .
+LOAD start.o
+LOAD /tmp/ccXywr42.ltrans0.ltrans.o
+OUTPUT(c_delay.elf elf32-littleriscv)
+
+.comment        0x0000000000000000       0x11
+ .comment       0x0000000000000000       0x11 /tmp/ccXywr42.ltrans0.ltrans.o
+                                         0x12 (size before relaxing)
+
+Cross Reference Table
+
+Symbol                                            File
+_ebss                                             start.o
+_edata                                            start.o
+_sbss                                             start.o
+_sdata                                            start.o
+_sidata                                           start.o
+delay_cycles_11                                   delay.o (symbol from plugin)
+                                                  c_delay.o (symbol from plugin)
+disable_interrupts                                vargen.o (symbol from plugin)
+disable_irq                                       start.o
+enable_interrupts                                 vargen.o (symbol from plugin)
+enable_irq                                        start.o
+irq                                               /tmp/ccXywr42.ltrans0.ltrans.o
+                                                  c_delay.o (symbol from plugin)
+                                                  start.o
+main                                              /tmp/ccXywr42.ltrans0.ltrans.o
+                                                  c_delay.o (symbol from plugin)
+                                                  start.o
+reg_intcon_bits                                   vargen.o (symbol from plugin)
+                                                  c_delay.o (symbol from plugin)
+reg_intflags_bits                                 vargen.o (symbol from plugin)
+                                                  c_delay.o (symbol from plugin)
+reg_porta_bits                                    vargen.o (symbol from plugin)
+reg_portb_bits                                    vargen.o (symbol from plugin)
+reg_spi_master_conf_bits                          vargen.o (symbol from plugin)
+reg_timer0_conf_bits                              vargen.o (symbol from plugin)

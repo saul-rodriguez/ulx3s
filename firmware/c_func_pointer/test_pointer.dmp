@@ -1,0 +1,231 @@
+
+test_pointer.elf:     file format elf32-littleriscv
+
+SYMBOL TABLE:
+00010000 l    d  .text	00000000 .text
+00000000 l    d  .data	00000000 .data
+00000004 l    d  .bss	00000000 .bss
+00000008 l    d  .heap	00000000 .heap
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 start.o
+00000000 l       .data	00000000 flag_isr
+00010000 l       .text	00000000 reset_vec
+000100be l       .text	00000000 start
+00010010 l       .text	00000000 irq_vec
+00010156 l       .text	00000000 end_init_data
+0001014a l       .text	00000000 loop_init_data
+0001016c l       .text	00000000 end_init_bss
+00010162 l       .text	00000000 loop_init_bss
+0001016e l       .text	00000000 loop
+00000000 l    df *ABS*	00000000 
+0001017a l     F .text	00000008 my_func
+00000004 l     O .bss	00000004 mypt
+000101f4 g       .text	00000000 _sidata
+000101f4 g       .text	00000000 _etext
+00000004 g       .bss	00000000 _sbss
+00000000 g       .data	00000000 _sdata
+00000008 g       .bss	00000000 _ebss
+00000008 g       .heap	00000000 _heap_start
+00000000 g       .data	00000000 _ram_start
+00010182 g     F .text	00000032 irq
+000101b4 g     F .text	0000003e main
+00000004 g       .data	00000000 _edata
+
+
+
+Disassembly of section .text:
+
+00010000 <reset_vec>:
+   10000:	0600600b          	0x600600b
+   10004:	a86d                	j	100be <start>
+   10006:	00000013          	nop
+   1000a:	00000013          	nop
+   1000e:	0001                	nop
+
+00010010 <irq_vec>:
+   10010:	00000293          	li	t0,0
+   10014:	0002a503          	lw	a0,0(t0)
+   10018:	00050863          	beqz	a0,10028 <irq_vec+0x18>
+   1001c:	4501                	li	a0,0
+   1001e:	00000293          	li	t0,0
+   10022:	00a2a023          	sw	a0,0(t0)
+   10026:	a851                	j	100ba <irq_vec+0xaa>
+   10028:	4505                	li	a0,1
+   1002a:	00000293          	li	t0,0
+   1002e:	00a2a023          	sw	a0,0(t0)
+   10032:	7119                	addi	sp,sp,-128
+   10034:	c006                	sw	ra,0(sp)
+   10036:	c20a                	sw	sp,4(sp)
+   10038:	c40e                	sw	gp,8(sp)
+   1003a:	c612                	sw	tp,12(sp)
+   1003c:	c816                	sw	t0,16(sp)
+   1003e:	ca1a                	sw	t1,20(sp)
+   10040:	cc1e                	sw	t2,24(sp)
+   10042:	ce22                	sw	s0,28(sp)
+   10044:	d026                	sw	s1,32(sp)
+   10046:	d22a                	sw	a0,36(sp)
+   10048:	d42e                	sw	a1,40(sp)
+   1004a:	d632                	sw	a2,44(sp)
+   1004c:	d836                	sw	a3,48(sp)
+   1004e:	da3a                	sw	a4,52(sp)
+   10050:	dc3e                	sw	a5,56(sp)
+   10052:	de42                	sw	a6,60(sp)
+   10054:	c0c6                	sw	a7,64(sp)
+   10056:	c2ca                	sw	s2,68(sp)
+   10058:	c4ce                	sw	s3,72(sp)
+   1005a:	c6d2                	sw	s4,76(sp)
+   1005c:	c8d6                	sw	s5,80(sp)
+   1005e:	cada                	sw	s6,84(sp)
+   10060:	ccde                	sw	s7,88(sp)
+   10062:	cee2                	sw	s8,92(sp)
+   10064:	d0e6                	sw	s9,96(sp)
+   10066:	d2ea                	sw	s10,100(sp)
+   10068:	d4ee                	sw	s11,104(sp)
+   1006a:	d6f2                	sw	t3,108(sp)
+   1006c:	d8f6                	sw	t4,112(sp)
+   1006e:	dafa                	sw	t5,116(sp)
+   10070:	dcfe                	sw	t6,120(sp)
+   10072:	0000c50b          	0xc50b
+   10076:	10c000ef          	jal	ra,10182 <irq>
+   1007a:	4082                	lw	ra,0(sp)
+   1007c:	4112                	lw	sp,4(sp)
+   1007e:	41a2                	lw	gp,8(sp)
+   10080:	4232                	lw	tp,12(sp)
+   10082:	42c2                	lw	t0,16(sp)
+   10084:	4352                	lw	t1,20(sp)
+   10086:	43e2                	lw	t2,24(sp)
+   10088:	4472                	lw	s0,28(sp)
+   1008a:	5482                	lw	s1,32(sp)
+   1008c:	5512                	lw	a0,36(sp)
+   1008e:	55a2                	lw	a1,40(sp)
+   10090:	5632                	lw	a2,44(sp)
+   10092:	56c2                	lw	a3,48(sp)
+   10094:	5752                	lw	a4,52(sp)
+   10096:	57e2                	lw	a5,56(sp)
+   10098:	5872                	lw	a6,60(sp)
+   1009a:	4886                	lw	a7,64(sp)
+   1009c:	4916                	lw	s2,68(sp)
+   1009e:	49a6                	lw	s3,72(sp)
+   100a0:	4a36                	lw	s4,76(sp)
+   100a2:	4ac6                	lw	s5,80(sp)
+   100a4:	4b56                	lw	s6,84(sp)
+   100a6:	4be6                	lw	s7,88(sp)
+   100a8:	4c76                	lw	s8,92(sp)
+   100aa:	5c86                	lw	s9,96(sp)
+   100ac:	5d16                	lw	s10,100(sp)
+   100ae:	5da6                	lw	s11,104(sp)
+   100b0:	5e36                	lw	t3,108(sp)
+   100b2:	5ec6                	lw	t4,112(sp)
+   100b4:	5f56                	lw	t5,116(sp)
+   100b6:	5fe6                	lw	t6,120(sp)
+   100b8:	6109                	addi	sp,sp,128
+   100ba:	0400000b          	0x400000b
+
+000100be <start>:
+   100be:	00000093          	li	ra,0
+   100c2:	00000193          	li	gp,0
+   100c6:	00000213          	li	tp,0
+   100ca:	00000293          	li	t0,0
+   100ce:	00000313          	li	t1,0
+   100d2:	00000393          	li	t2,0
+   100d6:	00000413          	li	s0,0
+   100da:	00000493          	li	s1,0
+   100de:	00000513          	li	a0,0
+   100e2:	00000593          	li	a1,0
+   100e6:	00000613          	li	a2,0
+   100ea:	00000693          	li	a3,0
+   100ee:	00000713          	li	a4,0
+   100f2:	00000793          	li	a5,0
+   100f6:	00000813          	li	a6,0
+   100fa:	00000893          	li	a7,0
+   100fe:	00000913          	li	s2,0
+   10102:	00000993          	li	s3,0
+   10106:	00000a13          	li	s4,0
+   1010a:	00000a93          	li	s5,0
+   1010e:	00000b13          	li	s6,0
+   10112:	00000b93          	li	s7,0
+   10116:	00000c13          	li	s8,0
+   1011a:	00000c93          	li	s9,0
+   1011e:	00000d13          	li	s10,0
+   10122:	00000d93          	li	s11,0
+   10126:	00000e13          	li	t3,0
+   1012a:	00000e93          	li	t4,0
+   1012e:	00000f13          	li	t5,0
+   10132:	00000f93          	li	t6,0
+   10136:	00000517          	auipc	a0,0x0
+   1013a:	0be50513          	addi	a0,a0,190 # 101f4 <_etext>
+   1013e:	00000593          	li	a1,0
+   10142:	00400613          	li	a2,4
+   10146:	00c5d863          	bge	a1,a2,10156 <end_init_data>
+
+0001014a <loop_init_data>:
+   1014a:	4114                	lw	a3,0(a0)
+   1014c:	c194                	sw	a3,0(a1)
+   1014e:	0511                	addi	a0,a0,4
+   10150:	0591                	addi	a1,a1,4
+   10152:	fec5cce3          	blt	a1,a2,1014a <loop_init_data>
+
+00010156 <end_init_data>:
+   10156:	00400513          	li	a0,4
+   1015a:	00800593          	li	a1,8
+   1015e:	00b55763          	bge	a0,a1,1016c <end_init_bss>
+
+00010162 <loop_init_bss>:
+   10162:	00052023          	sw	zero,0(a0)
+   10166:	0511                	addi	a0,a0,4
+   10168:	feb54de3          	blt	a0,a1,10162 <loop_init_bss>
+
+0001016c <end_init_bss>:
+   1016c:	20a1                	jal	101b4 <main>
+
+0001016e <loop>:
+   1016e:	a001                	j	1016e <loop>
+	...
+
+0001017a <my_func>:
+   1017a:	952e                	add	a0,a0,a1
+   1017c:	0ff57513          	andi	a0,a0,255
+   10180:	8082                	ret
+
+00010182 <irq>:
+   10182:	02057793          	andi	a5,a0,32
+   10186:	c791                	beqz	a5,10192 <irq+0x10>
+   10188:	001007b7          	lui	a5,0x100
+   1018c:	02000713          	li	a4,32
+   10190:	cbd8                	sw	a4,20(a5)
+   10192:	04057793          	andi	a5,a0,64
+   10196:	c791                	beqz	a5,101a2 <irq+0x20>
+   10198:	001007b7          	lui	a5,0x100
+   1019c:	04000713          	li	a4,64
+   101a0:	cbd8                	sw	a4,20(a5)
+   101a2:	08057513          	andi	a0,a0,128
+   101a6:	c511                	beqz	a0,101b2 <irq+0x30>
+   101a8:	001007b7          	lui	a5,0x100
+   101ac:	08000713          	li	a4,128
+   101b0:	cbd8                	sw	a4,20(a5)
+   101b2:	8082                	ret
+
+000101b4 <main>:
+   101b4:	1141                	addi	sp,sp,-16
+   101b6:	00010737          	lui	a4,0x10
+   101ba:	17a70793          	addi	a5,a4,378 # 1017a <my_func>
+   101be:	c04a                	sw	s2,0(sp)
+   101c0:	c422                	sw	s0,8(sp)
+   101c2:	c226                	sw	s1,4(sp)
+   101c4:	c606                	sw	ra,12(sp)
+   101c6:	00f02223          	sw	a5,4(zero) # 4 <_edata>
+   101ca:	17a70713          	addi	a4,a4,378
+   101ce:	4405                	li	s0,1
+   101d0:	001004b7          	lui	s1,0x100
+   101d4:	00240793          	addi	a5,s0,2
+   101d8:	0405                	addi	s0,s0,1
+   101da:	0ff7f793          	andi	a5,a5,255
+   101de:	0ff47413          	andi	s0,s0,255
+   101e2:	c8dc                	sw	a5,20(s1)
+   101e4:	4589                	li	a1,2
+   101e6:	8522                	mv	a0,s0
+   101e8:	9702                	jalr	a4
+   101ea:	c8c8                	sw	a0,20(s1)
+   101ec:	00402703          	lw	a4,4(zero) # 4 <_edata>
+   101f0:	b7d5                	j	101d4 <main+0x20>
+	...

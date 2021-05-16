@@ -1,0 +1,32 @@
+#Makefile 
+
+#Compiler variables
+CC = /opt/riscv32i/bin/riscv32-unknown-elf-gcc
+OBJDUMP = /opt/riscv32i/bin/riscv32-unknown-elf-objdump
+OBJCOPY = /opt/riscv32i/bin/riscv32-unknown-elf-objcopy
+
+#link flags
+LINK_FLAGS = -march=rv32imc -Wall -flto -nostartfiles -Wl,-Bstatic,-T,sections.lds,--strip-debug,-Map=firmware.map,--cref -ffreestanding -nostdlib
+
+#sources
+NAME=test_serial
+
+SRCS = test_irq.S
+
+all: $(NAME).hex4
+
+dump: $(NAME).elf
+	$(OBJDUMP) -d $(NAME).elf
+
+$(NAME).elf : $(SRCS)
+	$(CC) $(LINK_FLAGS) -o $(NAME).elf $^
+
+$(NAME).hex4 : $(NAME).elf
+	$(OBJCOPY) -O ihex $(NAME).elf $(NAME).hex
+	./ihex2all $(NAME).hex $(NAME).hex4
+
+clean: 
+	rm -rf *.elf *.hex *.hex4
+
+
+

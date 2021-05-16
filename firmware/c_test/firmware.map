@@ -1,0 +1,81 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000100000 xr
+RAM              0x0000000000000000 0x0000000000000400 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000000000000       0xd8
+                0x0000000000000000                . = ALIGN (0x4)
+ *(.text)
+ .text          0x0000000000000000       0xb8 /tmp/ccPzQYdn.o
+ .text          0x00000000000000b8       0x1e /tmp/ccbwzTvo.o
+                0x00000000000000b8                main
+ *(.text*)
+ *(.rodata)
+ *(.rodata*)
+ *(.srodata)
+ *(.srodata*)
+ *(.eh_frame)
+ *(.eh_frame*)
+                0x00000000000000d8                . = ALIGN (0x4)
+ *fill*         0x00000000000000d6        0x2 
+                0x00000000000000d8                _etext = .
+                0x00000000000000d8                _sidata = _etext
+
+.rela.dyn       0x00000000000000d8        0x0
+ .rela.text     0x00000000000000d8        0x0 /tmp/ccPzQYdn.o
+
+.data           0x0000000000000000        0x0 load address 0x00000000000000d8
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _sdata = .
+                0x0000000000000000                _ram_start = .
+ *(.data)
+ .data          0x0000000000000000        0x0 /tmp/ccPzQYdn.o
+ .data          0x0000000000000000        0x0 /tmp/ccbwzTvo.o
+ *(.data*)
+ *(.sdata)
+ *(.sdata*)
+ *(.init_array)
+ *(.init_array*)
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _edata = .
+
+.bss            0x0000000000000000        0x0 load address 0x00000000000000d8
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _sbss = .
+ *(.bss)
+ .bss           0x0000000000000000        0x0 /tmp/ccPzQYdn.o
+ .bss           0x0000000000000000        0x0 /tmp/ccbwzTvo.o
+ *(.bss*)
+ *(.sbss)
+ *(.sbss*)
+ *(COMMON)
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _ebss = .
+
+.heap           0x0000000000000000        0x0
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _heap_start = .
+LOAD /tmp/ccPzQYdn.o
+LOAD /tmp/ccbwzTvo.o
+OUTPUT(test_porta.elf elf32-littleriscv)
+
+.comment        0x0000000000000000       0x11
+ .comment       0x0000000000000000       0x11 /tmp/ccbwzTvo.o
+                                         0x12 (size before relaxing)
+
+Cross Reference Table
+
+Symbol                                            File
+_ebss                                             /tmp/ccPzQYdn.o
+_edata                                            /tmp/ccPzQYdn.o
+_sbss                                             /tmp/ccPzQYdn.o
+_sdata                                            /tmp/ccPzQYdn.o
+_sidata                                           /tmp/ccPzQYdn.o
+main                                              /tmp/ccbwzTvo.o
+                                                  /tmp/ccPzQYdn.o

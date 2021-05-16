@@ -1,0 +1,148 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+SPI_address         0x1               mcp23s17.o (symbol from plugin)
+mcp23s17_command    0x4               mcp23s17.o (symbol from plugin)
+SPI1_TxDefaultInterruptHandler
+                    0x4               spi1.o (symbol from plugin)
+spi1TxBuffer        0x8               spi1.o (symbol from plugin)
+spi1TxBufferRemaining
+                    0x1               spi1.o (symbol from plugin)
+SPI_write_val       0x1               mcp23s17.o (symbol from plugin)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000010000 0x0000000000100000 xr
+RAM              0x0000000000000000 0x0000000000000400 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000000010000      0x36c
+                0x0000000000010000                . = ALIGN (0x4)
+ *(.text)
+ .text          0x0000000000010000      0x176 start.o
+                0x000000000001009c                disable_irq
+                0x00000000000100ae                enable_irq
+ .text          0x0000000000010176       0xe0 /tmp/ccUB21XE.ltrans0.ltrans.o
+                0x0000000000010190                irq
+ *(.text*)
+ .text.startup  0x0000000000010256      0x116 /tmp/ccUB21XE.ltrans0.ltrans.o
+                0x0000000000010256                main
+ *(.rodata)
+ *(.rodata*)
+ *(.srodata)
+ *(.srodata*)
+ *(.eh_frame)
+ *(.eh_frame*)
+                0x000000000001036c                . = ALIGN (0x4)
+ *fill*         0x000000000001036c        0x0 
+                0x000000000001036c                _etext = .
+                0x000000000001036c                _sidata = _etext
+
+.rela.dyn       0x000000000001036c        0x0
+ .rela.text     0x000000000001036c        0x0 start.o
+
+.data           0x0000000000000000        0x4 load address 0x000000000001036c
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _sdata = .
+                0x0000000000000000                _ram_start = .
+ *(.data)
+ .data          0x0000000000000000        0x1 start.o
+ .data          0x0000000000000001        0x0 /tmp/ccUB21XE.ltrans0.ltrans.o
+ *(.data*)
+ *(.sdata)
+ *(.sdata*)
+ *(.init_array)
+ *(.init_array*)
+                0x0000000000000004                . = ALIGN (0x4)
+ *fill*         0x0000000000000001        0x3 
+                0x0000000000000004                _edata = .
+
+.bss            0x0000000000000004       0x18 load address 0x0000000000010370
+                0x0000000000000004                . = ALIGN (0x4)
+                0x0000000000000004                _sbss = .
+ *(.bss)
+ .bss           0x0000000000000004        0x0 start.o
+ .bss           0x0000000000000004        0x0 /tmp/ccUB21XE.ltrans0.ltrans.o
+ *(.bss*)
+ *(.sbss)
+ .sbss          0x0000000000000004       0x17 /tmp/ccUB21XE.ltrans0.ltrans.o
+ *(.sbss*)
+ *(COMMON)
+                0x000000000000001c                . = ALIGN (0x4)
+ *fill*         0x000000000000001b        0x1 
+                0x000000000000001c                _ebss = .
+
+.heap           0x000000000000001c        0x0
+                0x000000000000001c                . = ALIGN (0x4)
+                0x000000000000001c                _heap_start = .
+LOAD start.o
+LOAD /tmp/ccUB21XE.ltrans0.ltrans.o
+OUTPUT(spi_master.elf elf32-littleriscv)
+
+.comment        0x0000000000000000       0x11
+ .comment       0x0000000000000000       0x11 /tmp/ccUB21XE.ltrans0.ltrans.o
+                                         0x12 (size before relaxing)
+
+Cross Reference Table
+
+Symbol                                            File
+MCP23S17_setAddress                               mcp23s17.o (symbol from plugin)
+                                                  main.o (symbol from plugin)
+MCP23S17_setTrisA                                 mcp23s17.o (symbol from plugin)
+                                                  main.o (symbol from plugin)
+MCP23S17_writePortA                               mcp23s17.o (symbol from plugin)
+                                                  main.o (symbol from plugin)
+SPI1_ExchangeByte                                 spi1.o (symbol from plugin)
+                                                  mcp23s17.o (symbol from plugin)
+SPI1_Initialize                                   spi1.o (symbol from plugin)
+                                                  main.o (symbol from plugin)
+SPI1_Initialize_ISR                               spi1.o (symbol from plugin)
+SPI1_SetTxInterruptHandler                        spi1.o (symbol from plugin)
+SPI1_Transmit_ISR                                 spi1.o (symbol from plugin)
+                                                  interrupt_manager.o (symbol from plugin)
+SPI1_TxDefaultInterruptHandler                    spi1.o (symbol from plugin)
+SPI1_Write                                        spi1.o (symbol from plugin)
+SPI1_is_tx_ready                                  spi1.o (symbol from plugin)
+SPI_address                                       mcp23s17.o (symbol from plugin)
+SPI_write_val                                     mcp23s17.o (symbol from plugin)
+_ebss                                             start.o
+_edata                                            start.o
+_sbss                                             start.o
+_sdata                                            start.o
+_sidata                                           start.o
+delay_cycles_11                                   delay.o (symbol from plugin)
+                                                  main.o (symbol from plugin)
+disable_interrupts                                vargen.o (symbol from plugin)
+disable_irq                                       start.o
+enable_interrupts                                 vargen.o (symbol from plugin)
+enable_irq                                        start.o
+irq                                               /tmp/ccUB21XE.ltrans0.ltrans.o
+                                                  interrupt_manager.o (symbol from plugin)
+                                                  start.o
+main                                              /tmp/ccUB21XE.ltrans0.ltrans.o
+                                                  main.o (symbol from plugin)
+                                                  start.o
+mcp23s17_command                                  mcp23s17.o (symbol from plugin)
+reg_intcon_bits                                   vargen.o (symbol from plugin)
+                                                  main.o (symbol from plugin)
+                                                  interrupt_manager.o (symbol from plugin)
+                                                  spi1.o (symbol from plugin)
+reg_intflags_bits                                 vargen.o (symbol from plugin)
+                                                  interrupt_manager.o (symbol from plugin)
+                                                  spi1.o (symbol from plugin)
+reg_porta_bits                                    vargen.o (symbol from plugin)
+reg_portb_bits                                    vargen.o (symbol from plugin)
+                                                  main.o (symbol from plugin)
+reg_spi_master_conf_bits                          vargen.o (symbol from plugin)
+                                                  mcp23s17.o (symbol from plugin)
+                                                  spi1.o (symbol from plugin)
+reg_timer0_conf_bits                              vargen.o (symbol from plugin)
+spi1TxBuffer                                      spi1.o (symbol from plugin)
+spi1TxBufferRemaining                             spi1.o (symbol from plugin)
+spi1TxHead                                        spi1.o (symbol from plugin)
+spi1TxTail                                        spi1.o (symbol from plugin)

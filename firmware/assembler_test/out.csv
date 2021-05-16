@@ -1,0 +1,7 @@
+ Address    Code        Basic                     Source
+
+0x00400000  0xffff02b7  lui x5,0xfffffff0     16   	li x5, 0xFFFF0010
+0x00400004  0x01028293  addi x5,x5,0x00000010      
+0x00400008  0x0ff00313  addi x6,x0,0x000000ff 19   	li x6, 0xFF
+0x0040000c  0x0062a023  sw x6,0x00000000(x5)  23   	sw x6, 0(x5)
+0x00400010  0x0000006f  jal x0,0x00000000     28   stop:   b stop

@@ -1,0 +1,146 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+eusart1RxCount      0x1               eusart1.o (symbol from plugin)
+eusart1RxBuffer     0x8               eusart1.o (symbol from plugin)
+EUSART1_RxDefaultInterruptHandler
+                    0x4               eusart1.o (symbol from plugin)
+eusart1TxBufferRemaining
+                    0x1               eusart1.o (symbol from plugin)
+EUSART1_TxDefaultInterruptHandler
+                    0x4               eusart1.o (symbol from plugin)
+eusart1TxBuffer     0x8               eusart1.o (symbol from plugin)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000010000 0x0000000000100000 xr
+RAM              0x0000000000000000 0x0000000000000400 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000000010000      0x480
+                0x0000000000010000                . = ALIGN (0x4)
+ *(.text)
+ .text          0x0000000000010000      0x176 start.o
+                0x000000000001009c                disable_irq
+                0x00000000000100ae                enable_irq
+ .text          0x0000000000010176      0x1ac /tmp/cc1bdtOZ.ltrans0.ltrans.o
+                0x000000000001029a                irq
+ *(.text*)
+ .text.startup  0x0000000000010322      0x15c /tmp/cc1bdtOZ.ltrans0.ltrans.o
+                0x0000000000010322                main
+ *(.rodata)
+ *(.rodata*)
+ *(.srodata)
+ *(.srodata*)
+ *(.eh_frame)
+ *(.eh_frame*)
+                0x0000000000010480                . = ALIGN (0x4)
+ *fill*         0x000000000001047e        0x2 
+                0x0000000000010480                _etext = .
+                0x0000000000010480                _sidata = _etext
+
+.rela.dyn       0x0000000000010480        0x0
+ .rela.text     0x0000000000010480        0x0 start.o
+
+.data           0x0000000000000000        0x4 load address 0x0000000000010480
+                0x0000000000000000                . = ALIGN (0x4)
+                0x0000000000000000                _sdata = .
+                0x0000000000000000                _ram_start = .
+ *(.data)
+ .data          0x0000000000000000        0x1 start.o
+ .data          0x0000000000000001        0x0 /tmp/cc1bdtOZ.ltrans0.ltrans.o
+ *(.data*)
+ *(.sdata)
+ *(.sdata*)
+ *(.init_array)
+ *(.init_array*)
+                0x0000000000000004                . = ALIGN (0x4)
+ *fill*         0x0000000000000001        0x3 
+                0x0000000000000004                _edata = .
+
+.bss            0x0000000000000004       0x20 load address 0x0000000000010484
+                0x0000000000000004                . = ALIGN (0x4)
+                0x0000000000000004                _sbss = .
+ *(.bss)
+ .bss           0x0000000000000004        0x0 start.o
+ .bss           0x0000000000000004        0x0 /tmp/cc1bdtOZ.ltrans0.ltrans.o
+ *(.bss*)
+ *(.sbss)
+ .sbss          0x0000000000000004       0x20 /tmp/cc1bdtOZ.ltrans0.ltrans.o
+ *(.sbss*)
+ *(COMMON)
+                0x0000000000000024                . = ALIGN (0x4)
+                0x0000000000000024                _ebss = .
+
+.heap           0x0000000000000024        0x0
+                0x0000000000000024                . = ALIGN (0x4)
+                0x0000000000000024                _heap_start = .
+LOAD start.o
+LOAD /tmp/cc1bdtOZ.ltrans0.ltrans.o
+OUTPUT(test_serial.elf elf32-littleriscv)
+
+.comment        0x0000000000000000       0x11
+ .comment       0x0000000000000000       0x11 /tmp/cc1bdtOZ.ltrans0.ltrans.o
+                                         0x12 (size before relaxing)
+
+Cross Reference Table
+
+Symbol                                            File
+EUSART1_Initialize                                eusart1.o (symbol from plugin)
+                                                  test_serial.o (symbol from plugin)
+EUSART1_Read                                      eusart1.o (symbol from plugin)
+                                                  test_serial.o (symbol from plugin)
+EUSART1_RxDataHandler                             eusart1.o (symbol from plugin)
+EUSART1_RxDefaultInterruptHandler                 eusart1.o (symbol from plugin)
+                                                  interrupt_manager.o (symbol from plugin)
+EUSART1_SetRxInterruptHandler                     eusart1.o (symbol from plugin)
+EUSART1_SetTxInterruptHandler                     eusart1.o (symbol from plugin)
+EUSART1_Transmit_ISR                              eusart1.o (symbol from plugin)
+EUSART1_TxDefaultInterruptHandler                 eusart1.o (symbol from plugin)
+                                                  interrupt_manager.o (symbol from plugin)
+EUSART1_Write                                     eusart1.o (symbol from plugin)
+                                                  test_serial.o (symbol from plugin)
+EUSART1_is_rx_ready                               eusart1.o (symbol from plugin)
+                                                  test_serial.o (symbol from plugin)
+EUSART1_is_tx_ready                               eusart1.o (symbol from plugin)
+_ebss                                             start.o
+_edata                                            start.o
+_sbss                                             start.o
+_sdata                                            start.o
+_sidata                                           start.o
+delay_cycles_11                                   delay.o (symbol from plugin)
+                                                  test_serial.o (symbol from plugin)
+disable_interrupts                                vargen.o (symbol from plugin)
+disable_irq                                       start.o
+enable_interrupts                                 vargen.o (symbol from plugin)
+enable_irq                                        start.o
+eusart1RxBuffer                                   eusart1.o (symbol from plugin)
+eusart1RxCount                                    eusart1.o (symbol from plugin)
+                                                  test_serial.o (symbol from plugin)
+eusart1RxHead                                     eusart1.o (symbol from plugin)
+eusart1RxTail                                     eusart1.o (symbol from plugin)
+eusart1TxBuffer                                   eusart1.o (symbol from plugin)
+eusart1TxBufferRemaining                          eusart1.o (symbol from plugin)
+eusart1TxHead                                     eusart1.o (symbol from plugin)
+eusart1TxTail                                     eusart1.o (symbol from plugin)
+irq                                               /tmp/cc1bdtOZ.ltrans0.ltrans.o
+                                                  interrupt_manager.o (symbol from plugin)
+                                                  start.o
+main                                              /tmp/cc1bdtOZ.ltrans0.ltrans.o
+                                                  test_serial.o (symbol from plugin)
+                                                  start.o
+reg_intcon_bits                                   vargen.o (symbol from plugin)
+                                                  interrupt_manager.o (symbol from plugin)
+                                                  test_serial.o (symbol from plugin)
+                                                  eusart1.o (symbol from plugin)
+reg_intflags_bits                                 vargen.o (symbol from plugin)
+                                                  interrupt_manager.o (symbol from plugin)
+reg_porta_bits                                    vargen.o (symbol from plugin)
+reg_portb_bits                                    vargen.o (symbol from plugin)
+reg_spi_master_conf_bits                          vargen.o (symbol from plugin)
+reg_timer0_conf_bits                              vargen.o (symbol from plugin)

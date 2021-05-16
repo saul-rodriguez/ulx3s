@@ -1,0 +1,31 @@
+
+porta.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010000 <main>:
+   10000:	001002b7          	lui	t0,0x100
+   10004:	01428293          	addi	t0,t0,20 # 100014 <PORTA>
+   10008:	0ff00313          	li	t1,255
+   1000c:	0062a023          	sw	t1,0(t0)
+
+00010010 <m_loop>:
+   10010:	2811                	jal	10024 <delay>
+   10012:	0ff00313          	li	t1,255
+   10016:	0062a023          	sw	t1,0(t0)
+   1001a:	2029                	jal	10024 <delay>
+   1001c:	4301                	li	t1,0
+   1001e:	0062a023          	sw	t1,0(t0)
+   10022:	b7fd                	j	10010 <m_loop>
+
+00010024 <delay>:
+   10024:	4315                	li	t1,5
+
+00010026 <l1>:
+   10026:	137d                	addi	t1,t1,-1
+   10028:	fe604fe3          	bgtz	t1,10026 <l1>
+   1002c:	8082                	ret
+
+0001002e <end>:
+   1002e:	a001                	j	1002e <end>

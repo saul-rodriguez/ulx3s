@@ -1,0 +1,44 @@
+
+delay.elf:     file format elf32-littleriscv
+
+SYMBOL TABLE:
+00010000 l    d  .text	00000000 .text
+00000000 l    df *ABS*	00000000 delay.o
+00010000 l       .text	00000000 main
+00010004 l       .text	00000000 end
+0001000a l       .text	00000000 loop
+00010012 l       .text	00000000 end_loop
+00011818 g       *ABS*	00000000 __global_pointer$
+00011018 g       .text	00000000 __SDATA_BEGIN__
+00010006 g       .text	00000000 delay_cycles
+00000000         *UND*	00000000 _start
+00011018 g       .text	00000000 __BSS_END__
+00011018 g       .text	00000000 __bss_start
+00011018 g       .text	00000000 __DATA_BEGIN__
+00011018 g       .text	00000000 _edata
+00011018 g       .text	00000000 _end
+
+
+
+Disassembly of section .text:
+
+00010000 <main>:
+   10000:	4529                	li	a0,10
+   10002:	2011                	jal	10006 <delay_cycles>
+
+00010004 <end>:
+   10004:	a001                	j	10004 <end>
+
+00010006 <delay_cycles>:
+   10006:	1171                	addi	sp,sp,-4
+   10008:	c006                	sw	ra,0(sp)
+
+0001000a <loop>:
+   1000a:	00050463          	beqz	a0,10012 <end_loop>
+   1000e:	157d                	addi	a0,a0,-1
+   10010:	bfed                	j	1000a <loop>
+
+00010012 <end_loop>:
+   10012:	4082                	lw	ra,0(sp)
+   10014:	0111                	addi	sp,sp,4
+   10016:	8082                	ret
